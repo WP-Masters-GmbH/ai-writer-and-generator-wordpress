@@ -9,8 +9,8 @@
 </li>
 <li class="wpm-change-table" data-table="generate-content-table" id="wpm-trigger-generate-table">
     <div class="wpm-selector-info">
-        <div class="wpm-title">Generate Content</div>
-        <div class="wpm-description">Main section for generate posts</div>
+        <div class="wpm-title">Import Content</div>
+        <div class="wpm-description">Main section for import posts</div>
     </div>
     <div class="wpm-selector-icon">
         <i class="fas fa-edit"></i>

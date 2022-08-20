@@ -54,7 +54,7 @@ jQuery(document).ready(function($) {
         var category = $('#category-post').val();
         var articles_list = $('#articles_list').val();
         var activation_key = $('#activation_key').val();
-        var publish_status = $('#publish-status').val();
+        var publish_status = 'draft';
 
         $.ajax({
             url: settings.ajaxurl,

@@ -2,11 +2,11 @@
 	<div class="wpm-header-table-icon">
 		<i class="fas fa-edit"></i>
 	</div>
-	<div class="wpm-header-table-title">Generate Content</div>
+	<div class="wpm-header-table-title">Import Content</div>
 </div>
 <div class="wpm-body-content">
 	<div class="wpm-section-content">
-		<div class="wpm-section-title">Add article titles to generate Posts</div>
+		<div class="wpm-section-title">Add article titles to get AI Assistant Suggestions</div>
 		<div class="wpm-section-body">
 			<div class="wpm-section-body-list">
 				<div class="wpm-section-body-list-block">
@@ -18,7 +18,7 @@
                     </select>
 				</div>
                 <div class="wpm-section-body-list-block">
-                    <label for="category-post">Category to add Post</label>
+                    <label for="category-post">Category</label>
                     <select id="category-post">
 						<?php foreach($categories as $category) { ?>
                             <option value="<?php echo esc_attr($category->term_id); ?>"><?php echo esc_html($category->name); ?></option>
@@ -26,11 +26,6 @@
                     </select>
                 </div>
                 <div class="wpm-section-body-list-block">
-                    <label for="publish-status">Publication Status</label>
-                    <select id="publish-status">
-                        <option value="publish">Publish Immediately</option>
-                        <option value="draft">Keep in Draft status</option>
-                    </select>
                 </div>
                 <div class="wpm-section-body-list-block full-width">
                     <label for="articles_list">Posts Titles (one per line) / Posts titles must be minimum 3 words length. Non-legal content titles will be ignored</label>
@@ -39,12 +34,12 @@
 			</div>
 		</div>
 		<div class="wpm-section-footer">
-			<button class="wpm-button" id="wpm-send-articles-to-queue">Send to Generator</button>
+			<button class="wpm-button" id="wpm-send-articles-to-queue">Send to Assistant</button>
             <div class="wpm-ajax-error-message"></div>
 		</div>
 	</div>
 	<div class="wpm-section-content">
-		<div class="wpm-section-title">Queued Articles for Generation</div>
+		<div class="wpm-section-title">Queued Articles for Import</div>
 		<table class="wpm-status-table no-margin five-column" cellpadding="0" cellspacing="0">
 			<thead>
 			<tr>

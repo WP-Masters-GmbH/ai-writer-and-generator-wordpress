@@ -14,7 +14,7 @@
 					}
 					?></td>
                 <td><?php if(is_string($category)) { echo esc_html($category); } else { echo esc_html('Not found'); } ?></td>
-                <td><?php if($article->post_id > 0) { ?> <a href="<?php echo esc_url(get_permalink( $article->post_id )); ?>" class="wpm-button-black" target="_blank">Look Post</a> <?php } else { echo esc_html("In Process"); } ?></td>
+                <td><?php if($article->post_id > 0) { ?> <a href="<?php echo esc_url(get_permalink( $article->post_id )); ?>" class="wpm-button-black" target="_blank">View Suggestions</a> <?php } else { echo esc_html("In Process"); } ?></td>
                 <td><?php if($article->date_posted != '' && strtotime($article->date_posted) > 0) {
 						if(get_option('date_format')) {
 							echo esc_html(date(get_option('date_format'), strtotime($article->date_posted)));
@@ -27,7 +27,7 @@
             </tr>
 		<?php }} else { ?>
         <tr>
-            <td>No articles is generated</td>
+            <td>No articles is sent to Assistant</td>
         </tr>
 	<?php } ?>
     </tbody>
