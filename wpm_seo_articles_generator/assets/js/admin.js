@@ -14,6 +14,13 @@ jQuery(document).ready(function($) {
         $('#'+whereClick).trigger('click');
     });
 
+    $("body").on("click",".modal-view-content",function() {
+        var modal_title = $(this).data('title');
+        var modal_content = $(this).data('article-content');
+        $('#modal-content .modal-title').html(modal_title);
+        $('#wpm-content-here').val(modal_content);
+    });
+
     $("body").on("click","#wpm_seo_articles_generator #wpm-activate-plugin",function() {
 
         var button = $(this);

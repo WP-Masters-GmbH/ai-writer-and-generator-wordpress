@@ -29,9 +29,9 @@ class WPM_SEO_ArticlesGenerator_Configuration
 	 */
 	public function save_settings()
 	{
-		global $WPM_Helpers;
+		$WPM_Helpers = new WPM_SEO_ArticlesGenerator_Helpers();
 
-		if (isset($_POST[WPM_SEO_ARTICLES_GENERATOR_ID]) && is_array($_POST[WPM_SEO_ARTICLES_GENERATOR_ID])) {
+		if(isset($_POST[WPM_SEO_ARTICLES_GENERATOR_ID]) && is_array($_POST[WPM_SEO_ARTICLES_GENERATOR_ID])) {
 			$data = $WPM_Helpers->sanitize_array($_POST[WPM_SEO_ARTICLES_GENERATOR_ID]);
 			update_option(WPM_SEO_ARTICLES_GENERATOR_ID, serialize($data));
 		}
@@ -50,12 +50,42 @@ class WPM_SEO_ArticlesGenerator_Configuration
 	 */
 	public function admin_scripts_and_styles()
 	{
-		global $register_admin_styles, $register_admin_scripts;
+		// Admin Styles
+		$register_admin_styles = [
+			[
+				'name' => 'font-awesome',
+				'url' => 'libs/font-awesome/all.min.css'
+			],
+			[
+				'name' => 'modal',
+				'url' => 'libs/jquery-modal/jquery.modal.min.css'
+			],
+			[
+				'name' => 'admin',
+				'url' => 'assets/css/admin.css'
+			] // Main Style
+		];
 
 		// Register styles
 		foreach($register_admin_styles as $style) {
 			wp_enqueue_style(WPM_SEO_ARTICLES_GENERATOR_ID."-{$style['name']}", WPM_SEO_ARTICLES_GENERATOR_PLUGIN_PATH."/{$style['url']}");
 		}
+
+		// Admin Scripts
+		$register_admin_scripts = [
+			[
+				'name' => 'font-awesome',
+				'url' => 'libs/font-awesome/all.min.js'
+			],
+			[
+				'name' => 'modal',
+				'url' => 'libs/jquery-modal/jquery.modal.min.js'
+			],
+			[
+				'name' => 'admin',
+				'url' => 'assets/js/admin.js'
+			] // Main Script
+		];
 
 		// Register Scripts
 		foreach($register_admin_scripts as $script) {
@@ -74,12 +104,34 @@ class WPM_SEO_ArticlesGenerator_Configuration
 	 */
 	public function include_scripts_and_styles()
 	{
-		global $register_frontend_styles, $register_frontend_scripts;
+		// Frontend Styles
+		$register_frontend_styles = [
+			[
+				'name' => 'font-awesome',
+				'url' => 'libs/font-awesome/all.min.css'
+			],
+			[
+				'name' => 'frontend',
+				'url' => 'assets/css/frontend.css'
+			] // Main Style
+		];
 		
 		// Register styles
 		foreach($register_frontend_styles as $style) {
 			wp_enqueue_style(WPM_SEO_ARTICLES_GENERATOR_ID."-{$style['name']}", WPM_SEO_ARTICLES_GENERATOR_PLUGIN_PATH."/{$style['url']}", false, WPM_SEO_ARTICLES_GENERATOR_VERSION, 'all');
 		}
+
+		// Frontend Scripts
+		$register_frontend_scripts = [
+			[
+				'name' => 'font-awesome',
+				'url' => 'libs/font-awesome/all.min.js'
+			],
+			[
+				'name' => 'frontend',
+				'url' => 'assets/js/frontend.js'
+			] // Main Script
+		];
 
 		// Register Scripts
 		foreach($register_frontend_scripts as $script) {
@@ -98,7 +150,13 @@ class WPM_SEO_ArticlesGenerator_Configuration
 	 */
 	public function register_menu()
 	{
-		global $wp_version, $wpdb, $admin_menu, $generator_languages, $WPM_Database;
+		global $wp_version, $wpdb;
+
+		// Include classes
+		$WPM_Database = new WPM_SEO_ArticlesGenerator_Database();
+
+		// Select languages
+		$generator_languages = ["English (US)","French","Spanish","German"];
 
 		// Get Saved Settings
 		$queued_articles = $WPM_Database->get_articles_results();
@@ -110,6 +168,16 @@ class WPM_SEO_ArticlesGenerator_Configuration
 		$still_queued = $WPM_Database->get_queued_count();
 		$generated_hours = $WPM_Database->get_generated_24_hours_count();
 		$generated_all = $WPM_Database->get_generated_all_count();
+
+		// Register Admin Menu
+		$admin_menu = [
+			[
+				'title' => 'SEO Articles Generator',
+				'name' => 'Articles Generator',
+				'slug_url' => 'settings',
+				'template' => 'settings/settings.php'
+			], // Main menu
+		];
 
 		// Add Admin Menu
 		foreach($admin_menu as $item => $menu_item) {

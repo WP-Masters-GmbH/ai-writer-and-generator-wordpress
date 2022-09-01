@@ -12,9 +12,9 @@
 				<div class="wpm-section-body-list-block">
 					<label for="language-generator">Language</label>
                     <select id="language-generator">
-                        <?php foreach($generator_languages as $language) { ?>
-                            <option value="<?php echo esc_attr($language); ?>"><?php echo esc_html($language); ?></option>
-                        <?php } ?>
+	                    <?php foreach($generator_languages as $item => $language) { ?>
+                            <option value="<?php echo esc_attr($language); ?>" <?php if($item > 0) { echo esc_attr('disabled'); } ?>><?php echo esc_html($language); ?></option>
+	                    <?php } ?>
                     </select>
 				</div>
                 <div class="wpm-section-body-list-block">
@@ -55,4 +55,11 @@
             <?php include(WPM_SEO_ARTICLES_GENERATOR_PLUGIN_DIR."/templates/ajax/queued_articles_table.php"); ?>
         </div>
 	</div>
+</div>
+
+<div id="modal-content" class="modal">
+    <div class="modal-title">Post Content</div>
+    <div class="modal-content">
+        <textarea id="wpm-content-here" cols="30" rows="10"></textarea>
+    </div>
 </div>

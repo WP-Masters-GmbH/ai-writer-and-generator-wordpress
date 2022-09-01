@@ -16,6 +16,16 @@ class WPM_SEO_ArticlesGenerator_Database
 	}
 
 	/**
+	 * Get Article by ID
+	 */
+	public function get_article_by_id($id)
+	{
+		global $wpdb;
+
+		return $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}wpm_seo_articles_generator WHERE id='{$id}'" );
+	}
+
+	/**
 	 * Get count articles in queued generation
 	 */
 	public function get_queued_count()
@@ -62,13 +72,15 @@ class WPM_SEO_ArticlesGenerator_Database
 	/**
 	 * Update article by Title
 	 */
-	public function update_article($article_name, $post_id, $date_posted)
+	public function update_article($article_name, $article_content, $post_id, $date_posted, $errors = '')
 	{
 		global $wpdb;
 
 		return $wpdb->update("{$wpdb->prefix}wpm_seo_articles_generator", [
 			'post_id' => $post_id,
 			'date_posted' => $date_posted,
+			'article_content' => $article_content,
+			'errors' => $errors
 		], ['article_name' => $article_name]);
 	}
 }

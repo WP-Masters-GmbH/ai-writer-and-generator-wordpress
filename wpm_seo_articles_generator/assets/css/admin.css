@@ -307,6 +307,10 @@
     box-shadow: none !important;
 }
 
+#wpm_seo_articles_generator .wpm-center-content .wpm-body-content .wpm-section-content .wpm-button-black.wpm-red-btn {
+    background: #e10000;
+}
+
 #wpm_seo_articles_generator .wpm-center-content .wpm-body-content .wpm-section-content .wpm-button-black:hover {
     background: #ffaa19;
 }
@@ -454,6 +458,36 @@
     color: #22b189;
     vertical-align: -2px;
     margin-left: 3px;
+}
+
+.jquery-modal {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.jquery-modal .modal {
+    box-shadow: unset;
+    padding: 0;
+}
+
+.jquery-modal .modal-title {
+    background: #22b189;
+    padding: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 17px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.jquery-modal .modal-content {
+    padding: 20px;
+}
+
+.jquery-modal #wpm-content-here {
+    width: 100%;
+    background: #eee;
+    padding: 10px;
 }
 
 @media(max-width: 1400px) {

@@ -1,8 +1,8 @@
 <?php
 /*
- * Plugin Name: WPM SEO Articles Generator
- * Plugin URI: https://wp-masters.com/products/wpm-seo-articles-generator
- * Description: Generate Unique posts content with keywords and SEO titles
+ * Plugin Name: AI Content Writer & Generator
+ * Plugin URI: https://wp-masters.com/products/ai-content-writer
+ * Description: Generate content with our AI writer by given keywords, fully automatically.
  * Author: WP-Masters
  * Text Domain: wpm-seo-articles-generator
  * Author URI: https://wp-masters.com/
@@ -13,11 +13,8 @@
  * @copyright   Copyright (c) 2022
 */
 
-// Config / Helper functions
-require_once('include/config.php');
-require_once('include/helpers.php');
-
 // Models
+require_once('models/Helpers.php');
 require_once('models/Database.php');
 require_once('models/Settings.php');
 require_once('models/MainController.php');
@@ -26,7 +23,7 @@ require_once('models/MainController.php');
 define('WPM_SEO_ARTICLES_GENERATOR_ID', 'wpm_seo_articles_generator');
 define('WPM_SEO_ARTICLES_GENERATOR_PLUGIN_PATH', plugins_url('', __FILE__));
 define('WPM_SEO_ARTICLES_GENERATOR_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('WPM_SEO_ARTICLES_GENERATOR_VERSION', '1.0.5');
+define('WPM_SEO_ARTICLES_GENERATOR_VERSION', '1.0.6');
 
 // Include Classes
 $WPM_Database = new WPM_SEO_ArticlesGenerator_Database();
@@ -51,6 +48,8 @@ function wpm_seo_articles_generator_create_plugin_tables()
          post_id INTEGER(10) NOT NULL,
          category INTEGER(10) NOT NULL,
          article_name VARCHAR(100) NOT NULL,
+         article_content TEXT NOT NULL,
+         errors TEXT NOT NULL,
          date_posted DATETIME,
          timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
          PRIMARY KEY (id)

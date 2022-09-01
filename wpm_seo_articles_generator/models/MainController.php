@@ -23,28 +23,46 @@ class WPM_SEO_ArticlesGenerator_MainController
 	 */
 	public function create_new_post()
 	{
-		global $WPM_Database;
+		// Include Classes
+		$WPM_Database = new WPM_SEO_ArticlesGenerator_Database();
+		$WPM_Helpers = new WPM_SEO_ArticlesGenerator_Helpers();
 
 		if(isset($_POST['article_title']) && isset($_POST['article_description']) && isset($_POST['article_category']) && isset($_POST['article_status'])) {
 
 			// Prepare Data
 			$post_title = sanitize_text_field($_POST['article_title']);
-			$post_category = sanitize_text_field($_POST['article_category']);
-			$post_description = $_POST['article_description'];
-			$post_status = sanitize_text_field($_POST['article_status']);
-
-			// Create Post
-			$post_id = wp_insert_post(array(
-				'post_title' => $post_title,
-				'post_content' => $post_description,
-				'post_status' => $post_status,
-				'post_date' => date('Y-m-d H:i:s'),
-				'post_type' => 'post',
-				'post_category' => [$post_category]
+			$post_description = wp_kses( $_POST['article_description'], array(
+				'p' => array(),
+				'h2' => array(),
+				'h3' => array(),
 			));
 
-			$WPM_Database->update_article($post_title, $post_id, date('Y-m-d H:i:s'));
+			$WPM_Database->update_article($post_title, $post_description, 0, date('Y-m-d H:i:s'));
 			die;
+		} elseif(isset($_POST['article_title']) && isset($_POST['errors_api'])) {
+			$post_title = sanitize_text_field($_POST['article_title']);
+			$errors = $WPM_Helpers->sanitize_array($_POST['errors_api']);
+
+			$WPM_Database->update_article($post_title, '', 0, date('Y-m-d H:i:s'), $errors);
+			die;
+		} elseif(isset($_GET['import_ai_post'])) {
+			
+			$article = $WPM_Database->get_article_by_id(sanitize_text_field($_GET['import_ai_post']));
+
+			if(!empty($article)) {
+				// Create Post
+				$post_id = wp_insert_post(array(
+					'post_title' => $article->article_name,
+					'post_content' => $article->article_content,
+					'post_status' => 'draft',
+					'post_date' => date('Y-m-d H:i:s'),
+					'post_type' => 'post',
+					'post_category' => [$article->category]
+				));
+
+				wp_redirect(get_edit_post_link($post_id));
+				exit;
+			}
 		}
 	}
 
@@ -71,7 +89,8 @@ class WPM_SEO_ArticlesGenerator_MainController
 	 */
 	public function activate_plugin()
 	{
-		global $WPM_Helpers;
+		// Include Classes
+		$WPM_Helpers = new WPM_SEO_ArticlesGenerator_Helpers();
 
 		if(!wp_verify_nonce($_POST['nonce'], WPM_SEO_ARTICLES_GENERATOR_ID)) {
 			return false;
@@ -107,7 +126,9 @@ class WPM_SEO_ArticlesGenerator_MainController
 	 */
 	public function send_articles_to_queue()
 	{
-		global $WPM_Helpers, $WPM_Database;
+		// Include Classes
+		$WPM_Database = new WPM_SEO_ArticlesGenerator_Database();
+		$WPM_Helpers = new WPM_SEO_ArticlesGenerator_Helpers();
 
 		if(!wp_verify_nonce($_POST['nonce'], WPM_SEO_ARTICLES_GENERATOR_ID) && !isset($_POST['language']) && !isset($_POST['category']) && !isset($_POST['articles_list'])) {
 			return false;
