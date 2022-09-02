@@ -9,6 +9,10 @@ jQuery(document).ready(function($) {
         $('#'+table).show();
     });
 
+    $("body").on("click",".wpm-click-remove",function(){
+        $(this).remove();
+    });
+
     $("body").on("click","#wpm_seo_articles_generator .wpm-trigger-click",function(){
         var whereClick = $(this).data('trigger');
         $('#'+whereClick).trigger('click');

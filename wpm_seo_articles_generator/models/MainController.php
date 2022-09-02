@@ -60,6 +60,8 @@ class WPM_SEO_ArticlesGenerator_MainController
 					'post_category' => [$article->category]
 				));
 
+				$WPM_Database->update_article($article->article_name, $article->article_content, $post_id, date('Y-m-d H:i:s'));
+
 				wp_redirect(get_edit_post_link($post_id));
 				exit;
 			}
