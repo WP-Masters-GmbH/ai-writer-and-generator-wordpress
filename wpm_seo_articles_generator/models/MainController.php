@@ -83,6 +83,8 @@ class WPM_SEO_ArticlesGenerator_MainController
 			'body' => json_encode($data),
 		]);
 
+
+
 		return json_decode($response['body'], true);
 	}
 
@@ -93,10 +95,6 @@ class WPM_SEO_ArticlesGenerator_MainController
 	{
 		// Include Classes
 		$WPM_Helpers = new WPM_SEO_ArticlesGenerator_Helpers();
-
-		if(!wp_verify_nonce($_POST['nonce'], WPM_SEO_ARTICLES_GENERATOR_ID)) {
-			return false;
-		}
 
 		if(!isset($_POST['activation_key']) || $_POST['activation_key'] == '') {
 			wp_send_json([
@@ -132,7 +130,7 @@ class WPM_SEO_ArticlesGenerator_MainController
 		$WPM_Database = new WPM_SEO_ArticlesGenerator_Database();
 		$WPM_Helpers = new WPM_SEO_ArticlesGenerator_Helpers();
 
-		if(!wp_verify_nonce($_POST['nonce'], WPM_SEO_ARTICLES_GENERATOR_ID) && !isset($_POST['language']) && !isset($_POST['category']) && !isset($_POST['articles_list'])) {
+		if(!isset($_POST['language']) || !isset($_POST['category']) || !isset($_POST['articles_list'])) {
 			return false;
 		}
 
@@ -148,12 +146,15 @@ class WPM_SEO_ArticlesGenerator_MainController
 		$category = sanitize_text_field($_POST['category']);
 
 		// Check count Words in Titles
+		$filtered_list = [];
 		foreach($articles_list as $article) {
-			if(str_word_count($article) < 3) {
+			if(str_word_count($article) > 0 && str_word_count($article) < 3) {
 				wp_send_json([
 					'status' => 'false',
 					'message' => 'Some titles smaller than 3 words',
 				]);
+			} elseif(str_word_count($article) >= 3) {
+				$filtered_list[] = $article;
 			}
 		}
 
