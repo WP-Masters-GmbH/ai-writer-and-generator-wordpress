@@ -156,7 +156,7 @@ class WPM_SEO_ArticlesGenerator_Configuration
 		$WPM_Database = new WPM_SEO_ArticlesGenerator_Database();
 
 		// Select languages
-		$generator_languages = ["English (US)","French","Spanish","German"];
+		$generator_languages = ["English (US)","French (under development)","Spanish (under development)","German (under development)"];
 
 		// Get Saved Settings
 		$queued_articles = $WPM_Database->get_articles_results();

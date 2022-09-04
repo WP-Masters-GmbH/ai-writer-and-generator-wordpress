@@ -43,7 +43,7 @@ function wpm_seo_articles_generator_create_plugin_tables()
 	require_once( ABSPATH . 'wp-admin/install-helper.php' );
 
 	// Create table
-	$sql = "CREATE TABLE {$wpdb->prefix}wpm_seo_articles_generator (
+	$sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}wpm_seo_articles_generator (
          id INTEGER NOT NULL AUTO_INCREMENT,
          post_id INTEGER(10) NOT NULL,
          category INTEGER(10) NOT NULL,

@@ -305,6 +305,9 @@
     text-decoration: none;
     outline: none !important;
     box-shadow: none !important;
+    display: block;
+    margin: 5px auto;
+    text-align: center;
 }
 
 #wpm_seo_articles_generator .wpm-center-content .wpm-body-content .wpm-section-content .wpm-button-black.wpm-red-btn {
