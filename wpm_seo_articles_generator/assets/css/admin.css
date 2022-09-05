@@ -305,9 +305,6 @@
     text-decoration: none;
     outline: none !important;
     box-shadow: none !important;
-    display: block;
-    margin: 5px auto;
-    text-align: center;
 }
 
 #wpm_seo_articles_generator .wpm-center-content .wpm-body-content .wpm-section-content .wpm-button-black.wpm-red-btn {
@@ -491,6 +488,33 @@
     width: 100%;
     background: #eee;
     padding: 10px;
+}
+
+#wpm_seo_articles_generator .wpm-select-table .wpm-body-content .progress-info progress {
+    height: 20px;
+}
+
+#wpm_seo_articles_generator .wpm-select-table .wpm-body-content #footer-import-posts {
+    margin-top: 15px;
+}
+
+#wpm_seo_articles_generator .wpm-select-table .wpm-body-content #footer-import-posts .wpm-publication-status {
+    margin: 0 20px;
+}
+
+#wpm_seo_articles_generator .wpm-select-table .wpm-body-content #footer-import-posts #import-all-posts {
+    text-align: center;
+}
+
+#wpm_seo_articles_generator .wpm-select-table .wpm-body-content #footer-import-posts select {
+    text-align: left;
+    padding: 5px 35px 5px 15px;
+    color: #020336;
+    border-radius: 5px;
+    background-color: #f0f0f1;
+    border: 1px solid #d9d9d9;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 @media(max-width: 1400px) {

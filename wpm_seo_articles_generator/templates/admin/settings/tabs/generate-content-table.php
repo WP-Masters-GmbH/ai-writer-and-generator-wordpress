@@ -54,6 +54,22 @@
         <div class="wpm-table-scroller" id="queued_articles_table">
             <?php include(WPM_SEO_ARTICLES_GENERATOR_PLUGIN_DIR."/templates/ajax/queued_articles_table.php"); ?>
         </div>
+        <?php if ( isset( $settings['activation_key'] ) && $settings['activation_key'] != 'FREE' ) { ?>
+            <div class="wpm-section-footer" id="footer-import-posts">
+                <button class="wpm-button" id="wpm-import-all-posts">Import All Posts</button>
+                <div class="wpm-publication-status">
+                    <select id="publish-status">
+                        <option value="publish">Publish Immediately</option>
+                        <option value="draft">Keep in Draft status</option>
+                    </select>
+                </div>
+                <div class="progress-info" id="import-all-posts" style="display: none;">
+                    <div class="text-progress">Loaded: <span></span></div>
+                    <progress id="import-all-posts-progress" max="0" value="0"></progress>
+                </div>
+                <div class="wpm-ajax-error-message"></div>
+            </div>
+        <?php } ?>
 	</div>
 </div>
 

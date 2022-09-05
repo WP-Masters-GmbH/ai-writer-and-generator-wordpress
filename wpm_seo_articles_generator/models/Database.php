@@ -16,6 +16,16 @@ class WPM_SEO_ArticlesGenerator_Database
 	}
 
 	/**
+	 * Get new not imported articles
+	 */
+	public function get_not_imported_articles()
+	{
+		global $wpdb;
+
+		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}wpm_seo_articles_generator WHERE post_id='0'" );
+	}
+
+	/**
 	 * Get Article by ID
 	 */
 	public function get_article_by_id($id)

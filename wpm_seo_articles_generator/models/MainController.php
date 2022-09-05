@@ -16,6 +16,53 @@ class WPM_SEO_ArticlesGenerator_MainController
 		// Ajax Function
 		add_action('wp_ajax_activate_plugin', [$this, 'activate_plugin']);
 		add_action('wp_ajax_send_articles_to_queue', [$this, 'send_articles_to_queue']);
+		add_action('wp_ajax_import_all_posts', [$this, 'import_all_posts']);
+	}
+
+	/**
+	 * Mass import posts
+	 */
+	public function import_all_posts()
+	{
+		// Include Classes
+		$WPM_Database = new WPM_SEO_ArticlesGenerator_Database();
+		
+		if(isset($_POST['publish_status'])) {
+			$articles = $WPM_Database->get_not_imported_articles();
+
+			if(!empty($articles)) {
+				foreach($articles as $article) {
+					// Create Post
+					$post_id = wp_insert_post(array(
+						'post_title' => $article->article_name,
+						'post_content' => $article->article_content,
+						'post_status' => sanitize_text_field($_POST['publish_status']),
+						'post_date' => date('Y-m-d H:i:s'),
+						'post_type' => 'post',
+						'post_category' => [$article->category]
+					));
+
+					$WPM_Database->update_article($article->article_name, $article->article_content, $post_id, date('Y-m-d H:i:s'));
+
+					wp_send_json( [
+						'status'    => 'true',
+						'all_count' => count($articles)
+					] );
+				}
+			} else {
+				// Get refreshed table data
+				ob_start();
+				$queued_articles = $WPM_Database->get_articles_results();
+				include(WPM_SEO_ARTICLES_GENERATOR_PLUGIN_DIR."/templates/ajax/queued_articles_table.php");
+				$table = ob_get_clean();
+
+				wp_send_json( [
+					'status'   => 'finished',
+					'message' => 'All posts is imported!',
+					'html' => $table
+				] );
+			}
+		}
 	}
 
 	/**

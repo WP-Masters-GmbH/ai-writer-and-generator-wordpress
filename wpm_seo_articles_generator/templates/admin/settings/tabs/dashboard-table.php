@@ -46,19 +46,19 @@
             <div class="wpm-section-body-list">
                 <div class="wpm-section-body-list-block">
                     <div class="wpm-section-body-list-block-gray">
-                        <div class="wpm-section-body-list-block-gray-title">50 Points</div>
+                        <div class="wpm-section-body-list-block-gray-title">100 Points</div>
                         <div class="wpm-section-body-list-block-gray-description">Lite package for small blogs or if you need not much articles</div>
                         <div class="wpm-section-body-list-block-gray-button">
-                            <a href="https://wpmasters.test.onfastspring.com/50-ai-generated-posts" target="_blank">Buy license</a>
+                            <a href="https://shop.wp-masters.com/cart/?add-to-cart=11" target="_blank">Buy license</a>
                         </div>
                     </div>
                 </div>
                 <div class="wpm-section-body-list-block">
                     <div class="wpm-section-body-list-block-gray">
-                        <div class="wpm-section-body-list-block-gray-title">100 Points</div>
+                        <div class="wpm-section-body-list-block-gray-title">250 Points</div>
                         <div class="wpm-section-body-list-block-gray-description">Optimal package for medium size blogs and regular updates</div>
                         <div class="wpm-section-body-list-block-gray-button">
-                            <a href="https://wpmasters.test.onfastspring.com/100-ai-generated-posts" target="_blank">Buy license</a>
+                            <a href="https://shop.wp-masters.com/cart/?add-to-cart=13" target="_blank">Buy license</a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                         <div class="wpm-section-body-list-block-gray-title">500 Points</div>
                         <div class="wpm-section-body-list-block-gray-description">Pro package for big professional blogs and much content</div>
                         <div class="wpm-section-body-list-block-gray-button">
-                            <a href="https://wpmasters.test.onfastspring.com/500-ai-generated-posts" target="_blank">Buy license</a>
+                            <a href="https://shop.wp-masters.com/cart/?add-to-cart=14" target="_blank">Buy license</a>
                         </div>
                     </div>
                 </div>

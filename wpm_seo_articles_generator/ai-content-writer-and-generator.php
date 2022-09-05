@@ -23,7 +23,7 @@ require_once('models/MainController.php');
 define('WPM_SEO_ARTICLES_GENERATOR_ID', 'wpm_seo_articles_generator');
 define('WPM_SEO_ARTICLES_GENERATOR_PLUGIN_PATH', plugins_url('', __FILE__));
 define('WPM_SEO_ARTICLES_GENERATOR_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('WPM_SEO_ARTICLES_GENERATOR_VERSION', '1.0.6');
+define('WPM_SEO_ARTICLES_GENERATOR_VERSION', '1.0.7');
 
 // Include Classes
 $WPM_Database = new WPM_SEO_ArticlesGenerator_Database();

@@ -25,6 +25,8 @@ jQuery(document).ready(function($) {
         $('#wpm-content-here').val(modal_content);
     });
 
+
+
     $("body").on("click","#wpm_seo_articles_generator #wpm-activate-plugin",function() {
 
         var button = $(this);
@@ -93,4 +95,84 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+
+
+    $('#wpm_seo_articles_generator #wpm-import-all-posts').on('click', function () {
+
+        var counter = 0;
+        var all_count = 0;
+        var publish = $('#wpm_seo_articles_generator #publish-status').val();
+        var button = $(this);
+        button.text('Loading...');
+        button.closest('.wpm-section-footer').find('.wpm-ajax-error-message').html('');
+
+        $.ajax({
+            url: settings.ajaxurl,
+            data: {
+                'action': 'import_all_posts',
+                'publish_status': publish,
+                'nonce': settings.nonce
+            },
+            type:'POST',
+            dataType: 'json',
+            success:function(response) {
+                if(response.status === 'finished') {
+                    $('#wpm_seo_articles_generator #wpm-import-all-posts').attr("disabled", false);
+                    $('#wpm_seo_articles_generator #import-all-posts').hide();
+                    button.text('Import All Posts');
+                    button.closest('.wpm-section-footer').find('.wpm-ajax-error-message').addClass('wpm-success').html(response.message);
+                    $('#queued_articles_table').html(response.html);
+                } else if(response.status === 'error') {
+                    button.closest('.wpm-section-footer').find('.wpm-ajax-error-message').removeClass('wpm-success').html(response.message);
+                    $('#wpm_seo_articles_generator #wpm-import-all-posts').attr("disabled", false);
+                } else {
+                    counter++;
+                    if(all_count === 0) {
+                        all_count = response.all_count;
+                    }
+                    $('#wpm_seo_articles_generator #import-all-posts').show();
+                    $('#wpm_seo_articles_generator #import-all-posts span').html(counter+" / "+all_count);
+                    $('#import-all-posts-progress').attr('max', all_count).attr('value', counter);
+                    import_all_posts(counter, all_count, publish);
+                }
+            }
+        });
+    });
+
+    function import_all_posts(counter, all_count, publish)
+    {
+        $.ajax({
+            url: settings.ajaxurl,
+            data: {
+                'action': 'import_all_posts',
+                'publish_status': publish,
+                'nonce': settings.nonce
+            },
+            type:'POST',
+            dataType: 'json',
+            success:function(response) {
+                if(response.status === 'finished') {
+                    $('#wpm_seo_articles_generator #wpm-import-all-posts').attr("disabled", false);
+                    $('#wpm_seo_articles_generator #import-all-posts').hide();
+                    $('#wpm_seo_articles_generator #wpm-import-all-posts').text('Import All Posts');
+                    $('#wpm_seo_articles_generator #wpm-import-all-posts').closest('.wpm-section-footer').find('.wpm-ajax-error-message').addClass('wpm-success').html(response.message);
+                    $('#queued_articles_table').html(response.html);
+                } else if(response.status === 'error') {
+                    $('#wpm_seo_articles_generator #wpm-import-all-posts').closest('.wpm-section-footer').find('.wpm-ajax-error-message').removeClass('wpm-success').html(response.message);
+                    $('#wpm_seo_articles_generator #wpm-import-all-posts').attr("disabled", false);
+                } else {
+                    counter++;
+                    if(all_count === 0) {
+                        all_count = response.all_count;
+                    }
+                    $('#wpm_seo_articles_generator #import-all-posts').show();
+                    $('#wpm_seo_articles_generator #import-all-posts span').html(counter+" / "+all_count);
+                    $('#import-all-posts-progress').attr('max', all_count).attr('value', counter);
+                    import_all_posts(counter, all_count, publish);
+                }
+            }
+        });
+    }
+
 });
