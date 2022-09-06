@@ -72,6 +72,10 @@ class WPM_SEO_ArticlesGenerator_Database
 	{
 		global $wpdb;
 
+		if( trim($article_name) == '' ){
+			return null;
+		}
+
 		return $wpdb->insert("{$wpdb->prefix}wpm_seo_articles_generator", [
 			'post_id' => 0,
 			'category' => $category,
