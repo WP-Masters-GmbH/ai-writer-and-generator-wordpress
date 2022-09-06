@@ -85,13 +85,21 @@ class WPM_SEO_ArticlesGenerator_MainController
 			));
 
 			$WPM_Database->update_article($post_title, $post_description, 0, date('Y-m-d H:i:s'));
-			die;
+
+			wp_send_json([
+				'status' => 'true',
+				'message' => 'Article success uploaded!'
+			]);
 		} elseif(isset($_POST['article_title']) && isset($_POST['errors_api'])) {
 			$post_title = sanitize_text_field($_POST['article_title']);
 			$errors = $WPM_Helpers->sanitize_array($_POST['errors_api']);
 
 			$WPM_Database->update_article($post_title, '', 0, date('Y-m-d H:i:s'), $errors);
-			die;
+
+			wp_send_json([
+				'status' => 'true',
+				'message' => 'Article success uploaded!'
+			]);
 		} elseif(isset($_GET['import_ai_post'])) {
 			
 			$article = $WPM_Database->get_article_by_id(sanitize_text_field($_GET['import_ai_post']));
