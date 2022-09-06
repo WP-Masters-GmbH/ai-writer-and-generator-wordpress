@@ -11,7 +11,7 @@
 #toplevel_page_wp-masters-plugins .wp-menu-image.dashicons-before img {
     width: 25px;
     height: 25px;
-    padding-top: 12px;
+    padding-top: 5px !important;
     opacity: 1;
 }
 
@@ -426,6 +426,17 @@
     width: 20%;
 }
 
+#wpm_seo_articles_generator .wpm-select-table .wpm-body-content .wpm-status-table.five-column tbody td.double-btns {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#wpm_seo_articles_generator .wpm-select-table .wpm-body-content .wpm-status-table.five-column tbody td.double-btns a:nth-child(2) {
+    margin-top: 5px;
+}
+
 #wpm_seo_articles_generator .wpm-select-table .wpm-body-content .wpm-status-table.collections tbody td {
     width: 33%;
     padding: 10px 20px;
@@ -532,6 +543,12 @@
     }
     #wpm_seo_articles_generator .wpm-center-content {
         width: 67%;
+    }
+    #wpm_seo_articles_generator .wpm-select-table .wpm-body-content .wpm-status-table thead th:nth-child(2), #wpm_seo_articles_generator .wpm-select-table .wpm-body-content .wpm-status-table thead th:nth-child(5) {
+        display: none;
+    }
+    #wpm_seo_articles_generator .wpm-select-table .wpm-body-content #queued_articles_table tbody td:nth-child(2), #wpm_seo_articles_generator .wpm-select-table .wpm-body-content #queued_articles_table tbody td:nth-child(5) {
+        display: none;
     }
 }
 
