@@ -130,8 +130,6 @@ class WPM_SEO_ArticlesGenerator_MainController
 			'body' => json_encode($data),
 		]);
 
-
-
 		return json_decode($response['body'], true);
 	}
 
@@ -146,7 +144,7 @@ class WPM_SEO_ArticlesGenerator_MainController
 		if(!isset($_POST['activation_key']) || $_POST['activation_key'] == '') {
 			wp_send_json([
 				'status' => 'false',
-				'message' => 'License Key is not Set'
+				'message' => 'License key is not set'
 			]);
 		}
 
@@ -184,7 +182,7 @@ class WPM_SEO_ArticlesGenerator_MainController
 		if(!isset($_POST['activation_key']) || $_POST['activation_key'] == '') {
 			wp_send_json([
 				'status' => 'false',
-				'message' => 'License Key is not Set'
+				'message' => 'License key is not set'
 			]);
 		}
 
@@ -198,7 +196,7 @@ class WPM_SEO_ArticlesGenerator_MainController
 			if(str_word_count($article) > 0 && str_word_count($article) < 3) {
 				wp_send_json([
 					'status' => 'false',
-					'message' => 'Some titles smaller than 3 words',
+					'message' => 'Some subjects are smaller than 3 words',
 				]);
 			} elseif(str_word_count($article) >= 3) {
 				$filtered_list[] = $article;
